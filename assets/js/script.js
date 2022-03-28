@@ -3,9 +3,15 @@ var cityInputEl = document.querySelector("#city-input");
 var displayCurrentTemp = document.querySelector("#current-temp");
 var displayCurrentWind = document.querySelector("#current-wind");
 var displayCurrentHumid = document.querySelector("#current-humidity");
-var displayCurrentUv = document.querySelector("#current-uv")
-var displayCityDate = document.querySelector("#chosenCity-date")
-var displayCurrentIcon = document.querySelector("#current-day-icon")
+var displayCurrentUv = document.querySelector("#current-uv");
+var displayCityDate = document.querySelector("#chosenCity-date");
+var displayCurrentIcon = document.querySelector("#current-day-icon");
+var daysEl = document.querySelectorAll(".days");
+var tempsEl = document.querySelectorAll(".temps");
+var windsEl = document.querySelectorAll(".winds");
+var humidsEl = document.querySelectorAll(".humids");
+var weatherIconsEl = document.querySelectorAll(".weather-icon");
+var cityLocationsArr = []
 
 
 var getLocationData = function(city) {
@@ -17,6 +23,7 @@ var getLocationData = function(city) {
             var cityName = data[0].name;
             var cityLat = data[0].lat;
             var cityLon = data[0].lon;
+            saveLocation(cityName)
             getWeatherData(cityLat, cityLon,cityName)
 
         });   
@@ -39,8 +46,6 @@ var getWeatherData = function(cityLat, cityLon, cityName) {
             var currentIcon = data.current.weather[0].icon;
             var currentDate = moment().format("DD/MM/YYYY");
             
-
-           
             displayCityDate.textContent = cityName + " (" + currentDate + ")"
             displayCurrentTemp.textContent = CurrentTemp + " (Feels like " + currentFeelsLike + ")";
             displayCurrentWind.textContent = currentWindSpeed + " (wind Gust of " + currentWindGust + ")";
@@ -48,15 +53,26 @@ var getWeatherData = function(cityLat, cityLon, cityName) {
             displayCurrentUv.textContent = currentUv
             displayCurrentIcon.src = "http://openweathermap.org/img/wn/" + currentIcon + ".png"   
             
+            for (var i = 1; i < 6; i++){
+
+                var fiveDayDate = moment().add(i, 'days').format("DD/MM/YYYY");
+                
+    
+                var fiveDayTemp = data.daily[i].feels_like.day;
+                var fiveDayWind = data.daily[i].wind_speed;
+                var fiveDayHumid = data.daily[i].humidity;
+                var fiveDayIcon = data.daily[i].weather[0].icon;
+                
+                daysEl[i-1].textContent = fiveDayDate;
+                tempsEl[i-1].textContent = fiveDayTemp;
+                windsEl[i-1].textContent = fiveDayWind;
+                humidsEl[i-1].textContent = fiveDayHumid;
+                weatherIconsEl[i-1].src = "http://openweathermap.org/img/wn/" + fiveDayIcon + ".png"
+            }
         });
+
     });
 }   
-
-
-
-
-
-
 
 
 var searchInputHandler = function(event) {
@@ -72,6 +88,15 @@ var searchInputHandler = function(event) {
         alert("Please enter a city");
     }   
 };
+
+var saveLocation = function(cityName){
+   
+    cityLocationsArr.push(cityName);
+
+    localStorage.setItem("cityLocations", JSON.stringify(cityLocationsArr));
+};
+
+
 
 
 
