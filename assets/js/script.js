@@ -90,15 +90,16 @@ var searchInputHandler = function(event) {
 };
 
 var saveLocation = function(cityName){
-   
+    
+    
+    var locationExist = cityLocationsArr.includes(cityName)
+       
+    if(!locationExist){
     cityLocationsArr.push(cityName);
-
     localStorage.setItem("cityLocations", JSON.stringify(cityLocationsArr));
+    
+    };
 };
-
-
-
-
 
 
 
