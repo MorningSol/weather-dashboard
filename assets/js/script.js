@@ -11,6 +11,7 @@ var tempsEl = document.querySelectorAll(".temps");
 var windsEl = document.querySelectorAll(".winds");
 var humidsEl = document.querySelectorAll(".humids");
 var weatherIconsEl = document.querySelectorAll(".weather-icon");
+var searchHistory = document.querySelector("#history-container")
 var cityLocationsArr = []
 
 
@@ -97,10 +98,18 @@ var saveLocation = function(cityName){
     if(!locationExist){
     cityLocationsArr.push(cityName);
     localStorage.setItem("cityLocations", JSON.stringify(cityLocationsArr));
-    
+    createButton(cityName)
     };
 };
 
+var createButton = function(cityName){
+    var historyButton = document.createElement("button");
+    historyButton.classList = "btn-lg btn-primary w-100 mb-3";
+    historyButton.setAttribute("id", cityName)
+    historyButton.textContent = cityName;
+    searchHistory.appendChild(historyButton);
+
+}
 
 
 
