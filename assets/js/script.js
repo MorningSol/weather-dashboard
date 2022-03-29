@@ -11,7 +11,7 @@ var tempsEl = document.querySelectorAll(".temps");
 var windsEl = document.querySelectorAll(".winds");
 var humidsEl = document.querySelectorAll(".humids");
 var weatherIconsEl = document.querySelectorAll(".weather-icon");
-var searchHistory = document.querySelector("#history-container")
+var searchHistoryEl = document.querySelector("#history-container")
 var cityLocationsArr = []
 
 
@@ -41,18 +41,18 @@ var getWeatherData = function(cityLat, cityLon, cityName) {
             var CurrentTemp = data.current.temp;
             var currentFeelsLike = data.current.feels_like;
             var currentWindSpeed = data.current.wind_speed;
-            var currentWindGust = data.current.wind_gust;
+            
             var currentHumid = data.current.humidity;
             var currentUv = data.current.uvi
             var currentIcon = data.current.weather[0].icon;
             var currentDate = moment().format("DD/MM/YYYY");
             
-            displayCityDate.textContent = cityName + " (" + currentDate + ")"
+            displayCityDate.textContent = cityName + " (" + currentDate + ")";
             displayCurrentTemp.textContent = CurrentTemp + " (Feels like " + currentFeelsLike + ")";
-            displayCurrentWind.textContent = currentWindSpeed + " (wind Gust of " + currentWindGust + ")";
-            displayCurrentHumid.textContent = currentHumid
-            displayCurrentUv.textContent = currentUv
-            displayCurrentIcon.src = "https://openweathermap.org/img/wn/" + currentIcon + ".png"   
+            displayCurrentWind.textContent = currentWindSpeed;
+            displayCurrentHumid.textContent = currentHumid;
+            displayCurrentUv.textContent = currentUv;
+            displayCurrentIcon.src = "https://openweathermap.org/img/wn/" + currentIcon + ".png";   
             
             for (var i = 1; i < 6; i++){
 
@@ -107,16 +107,31 @@ var createButton = function(cityName){
     historyButton.classList = "btn-lg btn-primary w-100 mb-3";
     historyButton.setAttribute("id", cityName)
     historyButton.textContent = cityName;
-    searchHistory.appendChild(historyButton);
+    searchHistoryEl.appendChild(historyButton);
 };
 
 var loadHistory = function(){
     
+    var loadHistorySearch = localStorage.getItem("cityLocations");
+    
+    if (!loadHistorySearch) {
+        return false;
+    };
+    
+    loadHistorySearch = JSON.parse(loadHistorySearch);
+    
+    cityLocationsArr = loadHistorySearch
+        
+    for (var i = 0; i < loadHistorySearch.length; i++) {
+        createButton(loadHistorySearch[i]);
+    };
+};
 
-
-}
-
+var historyButtonHandler = function(event){
+    var previousCity = event.target.getAttribute("id");
+    getLocationData(previousCity);
+};
 
 searchInputEl.addEventListener("submit", searchInputHandler);
-
+searchHistoryEl.addEventListener("click", historyButtonHandler)
 loadHistory();
