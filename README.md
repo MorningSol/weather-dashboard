@@ -1,9 +1,5 @@
 # 06 Server-Side APIs: Weather Dashboard
 
-Developers are often tasked with retrieving data from another application's API and using it in the context of their own. Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Your challenge is to build a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
-
-Use the [OpenWeather One Call API](https://openweathermap.org/api/one-call-api) to retrieve weather data for cities. Read through the documentation for setup and usage instructions. You will use `localStorage` to store any persistent data.
-
 ## User Story
 
 ```
@@ -27,18 +23,20 @@ THEN I am presented with a 5-day forecast that displays the date, an icon repres
 WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 ```
+&nbsp;
 
-The following image demonstrates the application functionality:
+## Links:
 
-![weather dashboard demo](./Assets/images//06-server-side-apis-homework-demo.png)
+* https://morningsol.github.io/workday-scheduler/
 
-## Review
+* https://github.com/MorningSol/workday-scheduler
 
-You are required to submit the following for review:
+&nbsp;
 
-* The URL of the deployed application.
+## The following image demonstrates the application functionality:
 
-* The URL of the GitHub repository. Give the repository a unique name and include a high-quality README describing the project.
+&nbsp;
+![weather dashboard demo](./assets/images/screencapture-morningsol-github-io-weather-dashboard-2022-03-29-12_48_08.png)
 
-- - -
-© 2022 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+
+
