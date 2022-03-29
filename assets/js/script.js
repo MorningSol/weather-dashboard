@@ -16,7 +16,7 @@ var cityLocationsArr = []
 
 
 var getLocationData = function(city) {
-    var locationApi = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=8cb2b7a7319c51f2b5a6a5a0659eecac";
+    var locationApi = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=8cb2b7a7319c51f2b5a6a5a0659eecac";
 
     fetch(locationApi)
     .then(function(response){
@@ -52,7 +52,7 @@ var getWeatherData = function(cityLat, cityLon, cityName) {
             displayCurrentWind.textContent = currentWindSpeed + " (wind Gust of " + currentWindGust + ")";
             displayCurrentHumid.textContent = currentHumid
             displayCurrentUv.textContent = currentUv
-            displayCurrentIcon.src = "http://openweathermap.org/img/wn/" + currentIcon + ".png"   
+            displayCurrentIcon.src = "https://openweathermap.org/img/wn/" + currentIcon + ".png"   
             
             for (var i = 1; i < 6; i++){
 
@@ -68,7 +68,7 @@ var getWeatherData = function(cityLat, cityLon, cityName) {
                 tempsEl[i-1].textContent = fiveDayTemp;
                 windsEl[i-1].textContent = fiveDayWind;
                 humidsEl[i-1].textContent = fiveDayHumid;
-                weatherIconsEl[i-1].src = "http://openweathermap.org/img/wn/" + fiveDayIcon + ".png"
+                weatherIconsEl[i-1].src = "https://openweathermap.org/img/wn/" + fiveDayIcon + ".png"
             }
         });
 
@@ -108,10 +108,15 @@ var createButton = function(cityName){
     historyButton.setAttribute("id", cityName)
     historyButton.textContent = cityName;
     searchHistory.appendChild(historyButton);
+};
+
+var loadHistory = function(){
+    
+
 
 }
 
 
-
-
 searchInputEl.addEventListener("submit", searchInputHandler);
+
+loadHistory();
