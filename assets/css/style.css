@@ -1,6 +1,28 @@
 .bgc{
     background-color: lightsteelblue;  
 }
+
 h3, p {
     font-weight: bold;
+}
+
+.low {
+    padding: 7px 15px 10px 15px;
+    background-color: green;
+    border-radius: 10%;  
+}
+.moderate{
+    padding: 7px 15px 10px 15px;
+    background-color: yellow;
+    border-radius: 10%;
+}
+.high {
+    padding: 7px 15px 10px 15px;
+    background-color: orange;
+    border-radius: 10%;
+}
+ .very-high {
+    padding: 7px 15px 10px 15px;
+    background-color: red;
+    border-radius: 10%;
 }

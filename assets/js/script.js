@@ -11,8 +11,8 @@ var tempsEl = document.querySelectorAll(".temps");
 var windsEl = document.querySelectorAll(".winds");
 var humidsEl = document.querySelectorAll(".humids");
 var weatherIconsEl = document.querySelectorAll(".weather-icon");
-var searchHistoryEl = document.querySelector("#history-container")
-var cityLocationsArr = []
+var searchHistoryEl = document.querySelector("#history-container");
+var cityLocationsArr = [];
 
 
 var getLocationData = function(city) {
@@ -26,11 +26,11 @@ var getLocationData = function(city) {
             var cityLon = data[0].lon;
             saveLocation(cityName)
             getWeatherData(cityLat, cityLon,cityName)
-
         });   
     });
 
-}   
+};
+
 var getWeatherData = function(cityLat, cityLon, cityName) {
     var weatherApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + cityLat + "&lon=" + cityLon + "&units=metric&exclude=hourly,minutely,&appid=8cb2b7a7319c51f2b5a6a5a0659eecac";
 
@@ -54,6 +54,8 @@ var getWeatherData = function(cityLat, cityLon, cityName) {
             displayCurrentUv.textContent = currentUv;
             displayCurrentIcon.src = "https://openweathermap.org/img/wn/" + currentIcon + ".png";   
             
+            uvStatus(currentUv);
+
             for (var i = 1; i < 6; i++){
 
                 var fiveDayDate = moment().add(i, 'days').format("DD/MM/YYYY");
@@ -73,7 +75,7 @@ var getWeatherData = function(cityLat, cityLon, cityName) {
         });
 
     });
-}   
+} ;  
 
 
 var searchInputHandler = function(event) {
@@ -91,7 +93,6 @@ var searchInputHandler = function(event) {
 };
 
 var saveLocation = function(cityName){
-    
     
     var locationExist = cityLocationsArr.includes(cityName)
        
@@ -130,6 +131,23 @@ var loadHistory = function(){
 var historyButtonHandler = function(event){
     var previousCity = event.target.getAttribute("id");
     getLocationData(previousCity);
+};
+
+var uvStatus = function(uvIndex) {
+uvIndex = parseInt(uvIndex);
+console
+    if (uvIndex >= 8) {
+        displayCurrentUv.className = "very-high"
+    }
+    else if(uvIndex >= 6 && uvIndex <= 7) {
+        displayCurrentUv.className = "high"
+    }
+    else if(uvIndex >= 3 && uvIndex <= 5) {
+        displayCurrentUv.className = "moderate"   
+    }
+    else {
+        displayCurrentUv.className = "low"
+    }
 };
 
 searchInputEl.addEventListener("submit", searchInputHandler);
