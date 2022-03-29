@@ -21,14 +21,24 @@ var getLocationData = function(city) {
     fetch(locationApi)
     .then(function(response){
         response.json().then(function(data){
-            var cityName = data[0].name;
-            var cityLat = data[0].lat;
-            var cityLon = data[0].lon;
-            saveLocation(cityName)
-            getWeatherData(cityLat, cityLon,cityName)
-        });   
-    });
 
+            if (data.length == 0 ){
+                alert("Error: Could Not Find " + city)
+            }
+            else {
+                var cityName = data[0].name;
+                var cityLat = data[0].lat;
+                var cityLon = data[0].lon;
+        
+                saveLocation(cityName)
+                getWeatherData(cityLat, cityLon,cityName)
+            }
+        });   
+    })
+
+    .catch(function(error) {
+        alert("Unable to connect with OpenWeather");
+    }); 
 };
 
 var getWeatherData = function(cityLat, cityLon, cityName) {
@@ -37,7 +47,7 @@ var getWeatherData = function(cityLat, cityLon, cityName) {
     fetch(weatherApi)
     .then(function(response){
         response.json().then(function(data){
-            console.log(data)
+
             var CurrentTemp = data.current.temp;
             var currentFeelsLike = data.current.feels_like;
             var currentWindSpeed = data.current.wind_speed;
