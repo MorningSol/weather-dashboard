@@ -27,9 +27,9 @@ THEN I am again presented with current and future conditions for that city
 
 ## Links:
 
-* https://morningsol.github.io/workday-scheduler/
+* https://morningsol.github.io/weather-dashboard/
 
-* https://github.com/MorningSol/workday-scheduler
+* https://github.com/MorningSol/weather-dashboard
 
 &nbsp;
 
