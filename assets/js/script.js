@@ -14,7 +14,7 @@ var weatherIconsEl = document.querySelectorAll(".weather-icon");
 var searchHistoryEl = document.querySelector("#history-container");
 var cityLocationsArr = [];
 
-
+//  getting latitude and longitude for city
 var getLocationData = function(city) {
     var locationApi = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=8cb2b7a7319c51f2b5a6a5a0659eecac";
 
@@ -41,6 +41,7 @@ var getLocationData = function(city) {
     }); 
 };
 
+//getting weather data by lat/lon
 var getWeatherData = function(cityLat, cityLon, cityName) {
     var weatherApi = "https://api.openweathermap.org/data/2.5/onecall?lat=" + cityLat + "&lon=" + cityLon + "&units=metric&exclude=hourly,minutely,&appid=8cb2b7a7319c51f2b5a6a5a0659eecac";
 
@@ -88,6 +89,7 @@ var getWeatherData = function(cityLat, cityLon, cityName) {
 } ;  
 
 
+// processes user input
 var searchInputHandler = function(event) {
     event.preventDefault();
 
@@ -102,6 +104,7 @@ var searchInputHandler = function(event) {
     }   
 };
 
+// save to localStorage and creat array
 var saveLocation = function(cityName){
     
     var locationExist = cityLocationsArr.includes(cityName)
@@ -113,6 +116,7 @@ var saveLocation = function(cityName){
     };
 };
 
+// creates a button for quick city reference in search history
 var createButton = function(cityName){
     var historyButton = document.createElement("button");
     historyButton.classList = "btn-lg btn-primary w-100 mb-3";
@@ -121,6 +125,7 @@ var createButton = function(cityName){
     searchHistoryEl.appendChild(historyButton);
 };
 
+// loads data from localStorage
 var loadHistory = function(){
     
     var loadHistorySearch = localStorage.getItem("cityLocations");
@@ -138,11 +143,13 @@ var loadHistory = function(){
     };
 };
 
+//Handles buttons from search history
 var historyButtonHandler = function(event){
     var previousCity = event.target.getAttribute("id");
     getLocationData(previousCity);
 };
 
+// checks the severity of uv index with color coding
 var uvStatus = function(uvIndex) {
 uvIndex = parseInt(uvIndex);
 console
